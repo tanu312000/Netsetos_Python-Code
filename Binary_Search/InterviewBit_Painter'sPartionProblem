@@ -1,0 +1,47 @@
+You have to paint N boards of length {A0, A1, A2, A3 … AN-1}. 
+There are K painters available and you are also given how much time a painter takes to paint 1 unit of board. 
+You have to get this job done as soon as possible under the constraints that any painter will only paint contiguous sections 
+of board.
+
+"2 painters cannot share a board to paint. That is to say, a board
+cannot be painted partially by one painter, and partially by another.
+A painter will only paint contiguous boards. Which means a
+configuration where painter 1 paints board 1 and 3 but not 2 is
+invalid."
+
+Output:
+     return minimum time to paint all boards % 10000003
+
+Example
+
+Input : 
+  K : 2
+  T : 5
+  L : [1, 10]
+Output : 50
+
+
+
+def paint(self, A, B, C):
+        #Maximum Value in Array C is stored in low
+        #Sum of Values in Array C is stored in high
+        low=max(C)
+        high=sum(C)
+        while(low<=high):
+            mid=(low+high)/2
+            painter=1
+            wall=0
+            #Each time brush iterate in Array C
+            for brush in C:
+                if(wall+brush)>mid:
+                    painter=painter+1
+                    wall=brush
+                else:
+                    wall=wall+brush
+                    
+            if(painter<=A):
+                high=mid-1
+            else:
+                low=mid+1
+                
+        return (low*B)% 10000003
