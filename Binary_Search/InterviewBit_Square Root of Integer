@@ -1,0 +1,18 @@
+def sqrt(self, A):
+# If array contain 0 or 1,it automatically return the value in array
+        if (A==0 or A==1):
+            return A
+        low = 2
+        high = A/2
+        mid = low+(high-low)/2
+        while (low<=high):
+            mid = low+(high-low)/2
+            if(mid*mid==A):
+                return mid
+            elif (mid*mid>A):
+                high=mid-1
+            else:
+                low=mid+1
+        if (mid*mid>A):
+            mid=mid-1
+        return mid
