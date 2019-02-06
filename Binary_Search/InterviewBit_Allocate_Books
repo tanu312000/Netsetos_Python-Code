@@ -1,0 +1,45 @@
+Example:
+
+P : [12, 34, 67, 90]
+M : 2
+
+Output : 113
+
+There are 2 number of students. Books can be distributed in following fashion : 
+  1) [12] and [34, 67, 90]
+      Max number of pages is allocated to student 2 with 34 + 67 + 90 = 191 pages
+  2) [12, 34] and [67, 90]
+      Max number of pages is allocated to student 2 with 67 + 90 = 157 pages 
+  3) [12, 34, 67] and [90]
+      Max number of pages is allocated to student 1 with 12 + 34 + 67 = 113 pages
+
+Of the 3 cases, Option 3 has the minimum pages = 113. 
+
+
+
+
+def books(self, A, B):
+        if(len(A)<B):
+            return -1
+        if(len(A)==B):
+            return max(A)
+        
+        low=max(A)
+        high=sum(A)
+        while(low<=high):
+            mid=(low+high)/2
+            student=1
+            page=0
+            
+            for book in A:
+                if(page+book)>mid:
+                    student=student+1
+                    page=book
+                else:
+                    page=page+book
+            
+            if(student<=B):
+                high=mid-1
+            else:
+                low=mid+1
+        return low
